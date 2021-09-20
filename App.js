@@ -14,6 +14,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Login from './components/Login';
+import Calendar from './components/Calendar';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,19 +22,26 @@ const Stack = createNativeStackNavigator();
 
 const App = () => {
 
-  
+  const date = new Date();
+  const date_ = date.getDay()
 
   return (
     <NavigationContainer>
 
-        <Stack.Navigator initialRouteName="Home">
-          <Stack.Screen
-            name="Connexion"
-            component={Login}
-          />
-        </Stack.Navigator>
+      <Stack.Navigator initialRouteName={`Planning du ${date_}`}>
+        <Stack.Screen
+          name="Connexion"
+          component={Login}
+        />
+
+        <Stack.Screen
+          name={`Planning du ${date_}`}
+          component={Calendar}
+        />
+
+      </Stack.Navigator>
     </NavigationContainer>
-    
+
 
   );
 };
