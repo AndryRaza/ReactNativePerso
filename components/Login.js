@@ -18,8 +18,7 @@ import {API_URL} from '@env';
 const Login = ({navigation}) =>{
 
     const urlLogin = API_URL + "/auth/login"
-    console.log(urlLogin)
-
+ 
     const date = new Date();
     const date_ = date.getDay()
     
