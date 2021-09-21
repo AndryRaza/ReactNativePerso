@@ -12,8 +12,21 @@ import {
 } from 'react-native';
 
 import Activity from './Activity';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const getToken = async () => {
+  try {
+    const jsonValue = await AsyncStorage.getItem('token')
+    return jsonValue
+
+  } catch(e) {
+    console.log(e)
+  }
+}
+
 
 const Calendar = () =>{
+
     return (
         <View>
           <Activity name="Test 1" begin="10:00" />

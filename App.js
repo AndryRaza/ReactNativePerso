@@ -16,6 +16,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from './components/Login';
 import Calendar from './components/Calendar';
 
+
 const Stack = createNativeStackNavigator();
 
 
@@ -28,7 +29,8 @@ const App = () => {
   return (
     <NavigationContainer>
 
-      <Stack.Navigator initialRouteName={`Planning du ${date_}`}>
+     { /*<Stack.Navigator initialRouteName={`Planning du ${date_}`}>*/}
+      <Stack.Navigator initialRouteName="Connexion">
         <Stack.Screen
           name="Connexion"
           component={Login}
