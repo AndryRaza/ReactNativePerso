@@ -17,6 +17,9 @@ import {API_URL} from '@env';
 
 const Login = ({navigation}) =>{
 
+    const urlLogin = API_URL + "/auth/login"
+    console.log(urlLogin)
+
     const date = new Date();
     const date_ = date.getDay()
     
@@ -42,7 +45,7 @@ const Login = ({navigation}) =>{
 
         try{
             setConnexion(true);
-            const response = await fetch('http://10.0.2.2:8000/api/auth/login',{
+            const response = await fetch(urlLogin,{
                 method:"POST",
                 body:JSON.stringify({
                     email : login,
