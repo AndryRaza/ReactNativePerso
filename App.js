@@ -13,8 +13,8 @@ import {
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import Login from './screens/Login';
-import Calendar from './screens/Calendar';
+import Login from './views/Login';
+import Calendar from './views/Calendar';
 
 
 const Stack = createNativeStackNavigator();
