@@ -30,11 +30,12 @@ export async function getActivities(){
 };
 
 export async function getActivitiesByUser(){
+    const id = '1'
     const token = await getToken()
     .then(
         async(res) =>{
             const token_ = res;
-            const response = await fetch(API_URL+ '/user/1/activities',
+            const response = await fetch(`${API_URL}/user/${id}/activities`,
             {
                 method:"GET",
                 headers: {

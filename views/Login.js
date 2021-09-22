@@ -1,93 +1,82 @@
 import React from 'react';
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  TextInput,
-  useColorScheme,
-  View,
-  Button
+    StyleSheet,
+    Text,
+    TextInput,
+    View,
+    Button
 } from 'react-native';
 
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
-import {API_URL} from '@env';
 import { funcLogin } from '../components/Login';
 
-const Login = ({navigation}) =>{
+const Login = ({ navigation }) => {
 
-    const urlLogin = API_URL + "/auth/login"
- 
-    const date = new Date();
-    const date_ = date.getDay()
-    
-    const [login,setLogin] = React.useState('');
-    const [password,setPassword] = React.useState('');
 
-    const [connexion,setConnexion] = React.useState(false);
-    const [error,setError] = React.useState(false);
+    const [login, setLogin] = React.useState('');
+    const [password, setPassword] = React.useState('');
+
+    const [connexion, setConnexion] = React.useState(false);
+    const [error, setError] = React.useState(false);
 
     return (
         <View style={styles.container}>
             <Text style={styles.title}>
                 Dayliz
             </Text>
-            <TextInput 
-             style={styles.login}
-             placeholder="Nom d'utilisateur"
-             onChangeText={setLogin}
+            <TextInput
+                style={styles.login}
+                placeholder="Nom d'utilisateur"
+                onChangeText={setLogin}
             />
-            <TextInput 
-             style={styles.password}
-             secureTextEntry={true}
-             onChangeText={setPassword}
+            <TextInput
+                style={styles.password}
+                secureTextEntry={true}
+                onChangeText={setPassword}
             />
             {
                 error ? <Text style={styles.error}>
-                Une erreur s'est produite. Veuillez recommencer...
-            </Text> : null
+                    Une erreur s'est produite. Veuillez recommencer...
+                </Text> : null
             }
 
-            {connexion ? <Text style={styles.connexion}>Connexion en cours...</Text> :   <Button
+            {connexion ? <Text style={styles.connexion}>Connexion en cours...</Text> : <Button
                 title="Se connecter"
                 color="blue"
-                onPress={()=>funcLogin(login,password,navigation)}
-             />}
-          
+                onPress={() => funcLogin(login, password, navigation)}
+            />}
+
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    container:{
+    container: {
         flex: 1,
         justifyContent: 'center',
         alignContent: 'center',
-        padding:10
+        padding: 10
     },
-    login :{
-        borderWidth : 1,
+    login: {
+        borderWidth: 1,
         borderColor: 'black',
-        padding:10
+        padding: 10
     },
-    password :{
+    password: {
         marginTop: 10,
-        borderWidth : 1,
+        borderWidth: 1,
         borderColor: 'black',
-        padding:10,
+        padding: 10,
         marginBottom: 10
     },
-    title:{
-        textAlign : 'center',
+    title: {
+        textAlign: 'center',
         fontSize: 30
     },
-    connexion:{
-        textAlign:'right',
+    connexion: {
+        textAlign: 'right',
         fontSize: 16
     },
-    error:{
+    error: {
         color: 'red',
         fontSize: 16,
         margin: 5
