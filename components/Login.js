@@ -1,145 +1,65 @@
-import React from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  TextInput,
-  useColorScheme,
-  View,
-  Button
-} from 'react-native';
+// import React from 'react'
 
-import AsyncStorage from '@react-native-async-storage/async-storage';
+// import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import {API_URL} from '@env';
+// import {API_URL} from '@env';
 
-const Login = ({navigation}) =>{
-
-    const urlLogin = API_URL + "/auth/login"
+// const urlLogin = API_URL + "/auth/login"
  
-    const date = new Date();
-    const date_ = date.getDay()
-    
-    const [login,setLogin] = React.useState('');
-    const [password,setPassword] = React.useState('');
+// const date = new Date();
+// const date_ = date.getDay()
 
-    const [connexion,setConnexion] = React.useState(false);
-    const [error,setError] = React.useState(false);
+// const [login,setLogin] = React.useState('');
+// const [password,setPassword] = React.useState('');
 
-    const funcError = () =>{
-        setError(true);
-        setTimeout(()=>{
-            setError(false)
-        },2000);
-    }
+// const [connexion,setConnexion] = React.useState(false);
+// const [error,setError] = React.useState(false);
 
-    const funcLogin = async () =>{
+// const funcError = () =>{
+//     setError(true);
+//     setTimeout(()=>{
+//         setError(false)
+//     },2000);
+// }
 
-        if (login == '' && password == '')
-        {
-            funcError
-        }
+// const funcLogin = async (props) =>{
 
-        try{
-            setConnexion(true);
-            const response = await fetch(urlLogin,{
-                method:"POST",
-                body:JSON.stringify({
-                    email : login,
-                    password : password
-                }),
-                headers:{
-                    'Accept': 'application/json', 
-                    'Content-Type' : 'application/json',
-                }
-            })
-            if(response.ok)
-            {
-                const result = await response.json();
-                await AsyncStorage.setItem('token', JSON.stringify(result.access_token))
-                .then(
-                    ()=>{
-                        navigation.navigate(`Planning du ${date_}`)
-                        setConnexion(false);
-                    }
-                )
+//     if (login == '' && password == '')
+//     {
+//         funcError
+//     }
 
-            }
-            else{
-                funcError
-            }
-        }
-        catch(err)
-        {
-            console.log(err)
-        }
-    }
+//     try{
+//         setConnexion(true);
+//         const response = await fetch(urlLogin,{
+//             method:"POST",
+//             body:JSON.stringify({
+//                 email : login,
+//                 password : password
+//             }),
+//             headers:{
+//                 'Accept': 'application/json', 
+//                 'Content-Type' : 'application/json',
+//             }
+//         })
+//         if(response.ok)
+//         {
+//             const result = await response.json();
+//             await AsyncStorage.setItem('token', JSON.stringify(result.access_token))
+//             .then(
+//                 ()=>{
+//                     navigation.navigate(`Planning du ${date_}`)
+//                     setConnexion(false);
+//                 }
+//             )
 
-    return (
-        <View style={styles.container}>
-            <Text style={styles.title}>
-                Dayliz
-            </Text>
-            <TextInput 
-             style={styles.login}
-             placeholder="Nom d'utilisateur"
-             onChangeText={setLogin}
-            />
-            <TextInput 
-             style={styles.password}
-             secureTextEntry={true}
-             onChangeText={setPassword}
-            />
-            {
-                error ? <Text style={styles.error}>
-                Une erreur s'est produite. Veuillez recommencer...
-            </Text> : null
-            }
-
-            {connexion ? <Text style={styles.connexion}>Connexion en cours...</Text> :   <Button
-                title="Se connecter"
-                color="blue"
-                onPress={funcLogin}
-             />}
-          
-        </View>
-    );
-}
-
-const styles = StyleSheet.create({
-    container:{
-        flex: 1,
-        justifyContent: 'center',
-        alignContent: 'center',
-        padding:10
-    },
-    login :{
-        borderWidth : 1,
-        borderColor: 'black',
-        padding:10
-    },
-    password :{
-        marginTop: 10,
-        borderWidth : 1,
-        borderColor: 'black',
-        padding:10,
-        marginBottom: 10
-    },
-    title:{
-        textAlign : 'center',
-        fontSize: 30
-    },
-    connexion:{
-        textAlign:'right',
-        fontSize: 16
-    },
-    error:{
-        color: 'red',
-        fontSize: 16,
-        margin: 5
-    }
-});
-
-export default Login;
+//         }
+//         else{
+//             funcError
+//         }
+//     }
+//     catch(err)
+//     {
+//         console.log(err)
+//     }
+// }

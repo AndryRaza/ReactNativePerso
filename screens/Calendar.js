@@ -11,21 +11,13 @@ import {
   Button
 } from 'react-native';
 
-import Activity from './Activity';
+import Activity from '../components/Activity';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-const getToken = async () => {
-  try {
-    const jsonValue = await AsyncStorage.getItem('token')
-    return jsonValue
-
-  } catch(e) {
-    console.log(e)
-  }
-}
-
+import getActivities from '../components/Data';
 
 const Calendar = () =>{
+
+    getActivities()
 
     return (
         <View>
