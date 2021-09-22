@@ -14,6 +14,7 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {API_URL} from '@env';
+import { funcLogin } from '../components/Login';
 
 const Login = ({navigation}) =>{
 
@@ -27,55 +28,6 @@ const Login = ({navigation}) =>{
 
     const [connexion,setConnexion] = React.useState(false);
     const [error,setError] = React.useState(false);
-
-    const funcError = () =>{
-        setError(true);
-        setTimeout(()=>{
-            setError(false)
-        },2000);
-    }
-
-    const funcLogin = async () =>{
-
-        if (login == '' && password == '')
-        {
-            funcError
-        }
-
-        try{
-            setConnexion(true);
-            const response = await fetch(urlLogin,{
-                method:"POST",
-                body:JSON.stringify({
-                    email : login,
-                    password : password
-                }),
-                headers:{
-                    'Accept': 'application/json', 
-                    'Content-Type' : 'application/json',
-                }
-            })
-            if(response.ok)
-            {
-                const result = await response.json();
-                await AsyncStorage.setItem('token', JSON.stringify(result.access_token))
-                .then(
-                    ()=>{
-                        navigation.navigate(`Planning du ${date_}`)
-                        setConnexion(false);
-                    }
-                )
-
-            }
-            else{
-                funcError
-            }
-        }
-        catch(err)
-        {
-            console.log(err)
-        }
-    }
 
     return (
         <View style={styles.container}>
@@ -101,7 +53,7 @@ const Login = ({navigation}) =>{
             {connexion ? <Text style={styles.connexion}>Connexion en cours...</Text> :   <Button
                 title="Se connecter"
                 color="blue"
-                onPress={funcLogin}
+                onPress={()=>funcLogin(login,password,navigation)}
              />}
           
         </View>

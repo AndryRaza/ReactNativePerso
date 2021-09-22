@@ -34,11 +34,21 @@ const App = () => {
         <Stack.Screen
           name="Connexion"
           component={Login}
+          options={
+            {
+              headerShown : false
+            }
+          }
         />
 
         <Stack.Screen
           name={`Planning du ${date_}`}
           component={Calendar}
+          options={
+            {
+              headerBackVisible : false
+            }
+          }
         />
 
       </Stack.Navigator>

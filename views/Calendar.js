@@ -13,7 +13,7 @@ import {
 
 import Activity from '../components/Activity';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import getActivities from '../components/Data';
+import {getActivities} from '../components/Data';
 
 const Calendar = () =>{
 
