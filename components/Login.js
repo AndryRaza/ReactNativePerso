@@ -11,9 +11,9 @@ const date_ = date.getDay()
 
 export async function funcLogin(email,password,navigation){
 
-    if (email == '' && password == '')
+    if (email == '' || password == '')
     {
-        return ;
+        return null;
     }
 
     try{
@@ -40,7 +40,7 @@ export async function funcLogin(email,password,navigation){
 
         }
         else{
-            return;
+            return null;
         }
     }
     catch(err)

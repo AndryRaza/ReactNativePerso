@@ -17,8 +17,12 @@ export async function getActivities(){
             })
             if (response.ok)
             {
-            
                 const result = await response.json();
+                return result;
+            }
+            else
+            {
+                return null ;
             }
         }
     )
@@ -30,7 +34,7 @@ export async function getActivitiesByUser(){
     .then(
         async(res) =>{
             const token_ = res;
-            const response = await fetch(API_URL+ '/activities',
+            const response = await fetch(API_URL+ '/user/1/activities',
             {
                 method:"GET",
                 headers: {
@@ -41,8 +45,12 @@ export async function getActivitiesByUser(){
             })
             if (response.ok)
             {
-            
                 const result = await response.json();
+                return result;
+            }
+            else
+            {
+                return null;
             }
         }
     )
