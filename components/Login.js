@@ -4,12 +4,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {API_URL} from '@env';
 
+import { connect } from 'react-redux'
+
 const urlLogin = API_URL + "/auth/login"
  
 const date = new Date();
 const date_ = date.getDay()
 
-export async function funcLogin(email,password,navigation){
+export default connect (async function funcLogin(email,password,navigation){
 
     if (email == '' || password == '')
     {
@@ -47,4 +49,5 @@ export async function funcLogin(email,password,navigation){
     {
         console.log(err)
     }
-}
+})
+

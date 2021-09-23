@@ -16,9 +16,9 @@ export async function getActivities(){
     return result;
 };
 
-export async function getActivitiesByUser(){
+export async function getActivitiesByUser(token_){
     const id = '1'
-    const token_ = await getToken()
+    //const token_ = await getToken()
     const response = await fetch(`${API_URL}/users/${id}/activities`,
             {
                 method:"GET",

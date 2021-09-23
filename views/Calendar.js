@@ -10,31 +10,27 @@ import {
   View,
   Button
 } from 'react-native';
+import { connect } from 'react-redux';
 
 import Activity from '../components/Activity';
 import {getActivitiesByUser} from '../components/Data';
 import { date } from '../components/Date';
 
 
-const Calendar = () =>{
+const Calendar = (props) =>{
 
     const [activities,setActivities] = React.useState(null);
     const [date_,setDate_] = React.useState(date())
 
     React.useEffect(() => {
-
-      getActivitiesByUser().then((res)=>{
+      getActivitiesByUser(props.token).then((res)=>{
         setActivities(res)
     },
     (err)=>{
       console.log('erreur : ', err)
     })
-    console.log(date_)
-
 
     }, [])
-
-
 
     return (
         <View>
@@ -48,4 +44,10 @@ const Calendar = () =>{
     )
 }
 
-export default Calendar;
+const mapStateToProps = (state) => {
+  return {
+    token: state.token
+  }
+}
+
+export default connect(mapStateToProps) (Calendar);
