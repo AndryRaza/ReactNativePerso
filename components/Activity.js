@@ -15,8 +15,12 @@ import {
 const Activity = (props) => {
   return (
     <View style={styles.case}>
-      <Text>
+      <Text style={styles.date}>
         {props.name} - {props.begin}
+      </Text>
+      <Text style={styles.description}>
+        Description : {"\n"}
+        {props.description}
       </Text>
     </View>
   );
@@ -28,8 +32,16 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 10,
     borderColor: 'black',
-    backgroundColor : 'grey',
-    overflow: 'hidden'
+    backgroundColor : '#F0FFFF',
+    overflow: 'hidden',
+    flexDirection: 'row'
+  },
+  date:{
+    flex : 1,
+    paddingTop: 10
+  },
+  description : {
+    flex : 1
   }
 })
 

@@ -13,10 +13,13 @@ import {
 
 import Activity from '../components/Activity';
 import {getActivitiesByUser} from '../components/Data';
+import { date } from '../components/Date';
+
 
 const Calendar = () =>{
 
     const [activities,setActivities] = React.useState(null);
+    const [date_,setDate_] = React.useState(date())
 
     React.useEffect(() => {
 
@@ -26,6 +29,9 @@ const Calendar = () =>{
     (err)=>{
       console.log('erreur : ', err)
     })
+    console.log(date_)
+
+
     }, [])
 
 
@@ -35,7 +41,7 @@ const Calendar = () =>{
           {
             activities ?
             activities.map((elt,key)=>
-             <Activity name={elt.title} begin="10:00" key={key}/>
+             <Activity name={elt.title} begin="10:00" description={elt.description} key={key}/>
             ) : null
           }
         </View>

@@ -46,7 +46,7 @@ const App = () => {
           component={Calendar}
           options={
             {
-              headerBackVisible : false
+              //headerBackVisible : false
             }
           }
         />
