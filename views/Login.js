@@ -2,14 +2,15 @@ import React from 'react';
 import {
     StyleSheet,
     Text,
-    TextInput,
     View,
-    Button
+
 } from 'react-native';
 
 import { API_URL } from '@env';
 
-import { connect } from 'react-redux'
+import { TextInput, Button, Avatar } from 'react-native-paper';
+
+import { connect } from 'react-redux';
 
 //import { funcLogin } from '../components/Login';
 
@@ -45,14 +46,14 @@ const Login = (props) => {
                 }
             })
             if (response.ok) {
-               await response.json()
+                await response.json()
                     .then(
-                        (result)=>{
-                            const action = {type: "CONNEXION", value:result.access_token}  
+                        (result) => {
+                            const action = { type: "CONNEXION", value: result.access_token }
                             props.dispatch(action)
-                            props.navigation.navigate(`Planning`) 
+                            props.navigation.navigate(`Planning`)
                         }
-                    ) 
+                    )
             }
             else {
                 return null;
@@ -68,31 +69,47 @@ const Login = (props) => {
     return (
 
         <View style={styles.container}>
-            <Text style={styles.title}>
-                Dayliz
-            </Text>
-            <TextInput
-                style={styles.login}
-                placeholder="Nom d'utilisateur"
-                onChangeText={setLogin}
-            />
-            <TextInput
-                style={styles.password}
-                secureTextEntry={true}
-                onChangeText={setPassword}
-            />
-            {
-                error ? <Text style={styles.error}>
-                    Une erreur s'est produite. Veuillez recommencer...
-                </Text> : null
-            }
+            <View style={styles.titleContainer}>
+                <Text style={styles.title}>
+                    Dayliz
+                </Text>
+                <View style={{ justiftyContent: "center", alignItems: "center" }}>
+                    <Avatar.Icon style={{ backgroundColor: 'red'}} size={110} icon="calendar-check" />
+                </View>
+            </View>
 
-            {connexion ? <Text style={styles.connexion}>Connexion en cours...</Text> : <Button
-                title="Se connecter"
-                color="blue"
-                onPress={() => funcLogin(login, password)}
-            />}
 
+            <View style={styles.form}>
+                <TextInput
+                    mode="outlined"
+                    label="Nom d'utilisateur"
+                    placeholder="Amouranth"
+                    theme={{ colors: { primary: 'red',underlineColor:'transparent',}}}
+                    onChangeText={setLogin}
+                />
+                <TextInput
+                    mode="outlined"
+                    label="Mot de passe"
+                    secureTextEntry={true}
+                    onChangeText={setPassword}
+                    theme={{ colors: { primary: 'red',underlineColor:'transparent',}}}
+                    style={styles.password}
+                />
+                {
+                    error ? <Text style={styles.error}>
+                        Une erreur s'est produite. Veuillez recommencer...
+                    </Text> : null
+                }
+
+                <Button
+                    mode="contained"
+                    icon="login"
+                    color="red"
+                    onPress={() => funcLogin(login, password)}
+                >
+                    Se connecter
+                </Button>
+            </View>
         </View>
     );
 }
@@ -104,21 +121,26 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         padding: 10
     },
+    titleContainer: {
+        justifyContent: 'center',
+        alignContent: 'center',
+        flex: 1
+    },
+    form: {
+        flex: 1
+    },
     login: {
         borderWidth: 1,
         borderColor: 'black',
-        padding: 10
+        //padding: 10
     },
     password: {
         marginTop: 10,
-        borderWidth: 1,
-        borderColor: 'black',
-        padding: 10,
         marginBottom: 10
     },
     title: {
         textAlign: 'center',
-        fontSize: 30
+        fontSize: 70
     },
     connexion: {
         textAlign: 'right',
@@ -133,8 +155,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
     return state
-  }
+}
 
-  
+
 
 export default connect(mapStateToProps)(Login);

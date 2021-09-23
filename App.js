@@ -17,6 +17,7 @@ import Login from './views/Login';
 import Calendar from './views/Calendar';
 
 import { Provider } from 'react-redux'
+import { Provider as PaperProvider } from 'react-native-paper';
 import Store from './store/configureStore'
 
 const Stack = createNativeStackNavigator();
@@ -30,30 +31,32 @@ const App = () => {
 
   return (
     <Provider store={Store}>
-      <NavigationContainer>
-        { /*<Stack.Navigator initialRouteName={`Planning du ${date_}`}>*/}
-        <Stack.Navigator initialRouteName="Connexion">
-          <Stack.Screen
-            name="Connexion"
-            component={Login}
-            options={
-              {
-                headerShown: false
+      <PaperProvider>
+        <NavigationContainer>
+          { /*<Stack.Navigator initialRouteName={`Planning du ${date_}`}>*/}
+          <Stack.Navigator initialRouteName="Connexion">
+            <Stack.Screen
+              name="Connexion"
+              component={Login}
+              options={
+                {
+                  headerShown: false
+                }
               }
-            }
-          />
+            />
 
-          <Stack.Screen
-            name={`Planning`}
-            component={Calendar}
-            options={
-              {
-                headerBackVisible : false
+            <Stack.Screen
+              name={`Planning`}
+              component={Calendar}
+              options={
+                {
+                  headerBackVisible: false
+                }
               }
-            }
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </PaperProvider>
     </Provider>
 
 
