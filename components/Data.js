@@ -2,40 +2,24 @@ import getToken from './Token'
 import {API_URL} from '@env';
 
 export async function getActivities(){
-    const token = await getToken()
-    .then(
-        async(res) =>{
-            const token_ = res;
-            const response = await fetch(API_URL+ '/activities',
-            {
-                method:"GET",
-                headers: {
-                    'Accept': 'application/json', 
-                    'Content-Type' : 'application/json',
-                    'Authorization': 'Bearer ' + token_
-                }
-            })
-            if (response.ok)
-            {
-                const result = await response.json();
-                return result;
-            }
-            else
-            {
-                return null ;
-            }
+    const token_ = await getToken()
+    const response = await fetch(API_URL+ '/activities',
+    {
+        method:"GET",
+        headers: {
+            'Accept': 'application/json', 
+            'Content-Type' : 'application/json',
+            'Authorization': 'Bearer ' + token_
         }
-    )
-
+    })
+    const result = await response.json();
+    return result;
 };
 
 export async function getActivitiesByUser(){
     const id = '1'
-    const token = await getToken()
-    .then(
-        async(res) =>{
-            const token_ = res;
-            const response = await fetch(`${API_URL}/user/${id}/activities`,
+    const token_ = await getToken()
+    const response = await fetch(`${API_URL}/users/${id}/activities`,
             {
                 method:"GET",
                 headers: {
@@ -44,16 +28,8 @@ export async function getActivitiesByUser(){
                     'Authorization': 'Bearer ' + token_
                 }
             })
-            if (response.ok)
-            {
-                const result = await response.json();
-                return result;
-            }
-            else
-            {
-                return null;
-            }
-        }
-    )
-
+    const result = await response.json();
+    return result.data;
+    
+    
 };

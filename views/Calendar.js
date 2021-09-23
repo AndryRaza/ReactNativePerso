@@ -12,17 +12,32 @@ import {
 } from 'react-native';
 
 import Activity from '../components/Activity';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {getActivities} from '../components/Data';
+import {getActivitiesByUser} from '../components/Data';
 
 const Calendar = () =>{
 
-    getActivities()
+    const [activities,setActivities] = React.useState(null);
+
+    React.useEffect(() => {
+
+      getActivitiesByUser().then((res)=>{
+        setActivities(res)
+    },
+    (err)=>{
+      console.log('erreur : ', err)
+    })
+    }, [])
+
+
 
     return (
         <View>
-          <Activity name="Test 1" begin="10:00" />
-          <Activity name="Test 2" begin="12:00" />
+          {
+            activities ?
+            activities.map((elt,key)=>
+             <Activity name={elt.title} begin="10:00" key={key}/>
+            ) : null
+          }
         </View>
     )
 }
