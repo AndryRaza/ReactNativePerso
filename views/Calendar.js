@@ -18,7 +18,10 @@ import { date } from '../components/Date';
 
 import { Appbar, Searchbar } from 'react-native-paper';
 
+import { addTime } from '../components/Time';
+
 const Calendar = (props) => {
+
 
   const [activities, setActivities] = React.useState(null);
   const [date_, setDate_] = React.useState(date())
@@ -27,6 +30,7 @@ const Calendar = (props) => {
   const [searchQuery, setSearchQuery] = React.useState('');
   const onChangeSearch = query => setSearchQuery(query);
 
+  let beginDay = "08:00"
 
   React.useEffect(() => {
     getActivitiesByUser(props.token).then((res) => {
@@ -38,9 +42,27 @@ const Calendar = (props) => {
 
   }, [])
 
-  return (
-    <View>
+  const renderActivities = () =>{
+    let tab = []
+    activities.map((elt, key) =>{
+      let provi = beginDay
+      beginDay = addTime(beginDay,elt.duree)
+      tab.push (     
+           <Activity name={elt.title} beginAt={provi} endAt={beginDay} apprenant={elt.user} description={elt.description} key={key}/>
+       )
+    })
 
+    return tab
+  }
+
+  const logout = () => {
+    const action = { type: "DECONNEXION", value: null }
+    props.dispatch(action)
+    props.navigation.navigate(`Connexion`)
+  }
+
+  return (
+    <View>     
       {
         boolSearch ? <Searchbar
           placeholder="Search"
@@ -49,16 +71,15 @@ const Calendar = (props) => {
           style={{}}
         /> : <Appbar.Header style={{ backgroundColor: 'red' }}>
           <Appbar.Content title="Planning" subtitle={date_} />
-          <Appbar.Action icon="magnify" onPress={() => { setBoolSearch(true) }} />
-          <Appbar.Action icon="dots-horizontal" onPress={() => { }} />
+          {/* <Appbar.Action icon="magnify" onPress={() => { setBoolSearch(true) }} /> */}
+          <Appbar.Action icon="power" onPress={logout} />
         </Appbar.Header>
       }
 
       {
         activities ?
-          activities.map((elt, key) =>
-            <Activity name={elt.title} begin="10:00" description={elt.description} key={key} />
-          ) : null
+          renderActivities()
+         : null
       }
     </View>
   )

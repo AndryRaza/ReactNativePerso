@@ -1,4 +1,4 @@
-const initialState = { token: 'null' }
+const initialState = { token: null }
 
 function connexion(state = initialState, action) {
     let nextState
@@ -9,6 +9,14 @@ function connexion(state = initialState, action) {
                 token : action.value
             }
             return nextState || state
+
+        case 'DECONNEXION':{
+            nextState = {
+                ...state,
+                token : action.value
+            }
+            return nextState || state
+        }
 
         default:
             return state
